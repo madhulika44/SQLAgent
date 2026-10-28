@@ -1,0 +1,18 @@
+# Secrets - never commit
+.env
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Generated reports
+demo_results.md
+
+# Editors / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

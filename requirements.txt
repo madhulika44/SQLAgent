@@ -1,0 +1,24 @@
+# Pinned versions so everyone (and the demo machine) gets the exact same behaviour.
+# Install with:  pip install -r requirements.txt
+
+# --- Database ---
+pyodbc==5.3.0              # talks to SQL Server through "ODBC Driver 18 for SQL Server"
+
+# --- Phase 2: sample data ---
+Faker==40.43.0             # realistic Indian names, emails, phone numbers (locale en_IN)
+python-dotenv==1.2.4       # reads .env for the seed script
+
+# --- Phase 3: agent core ---
+pydantic==2.14.1
+pydantic-settings==2.16.1  # typed settings loaded from .env
+sqlglot==30.25.0           # parses T-SQL so we can validate generated queries
+groq==1.7.0                # Groq LLM SDK (default provider)
+google-genai==2.33.0       # Google Gemini SDK (fallback provider)
+
+# --- Phase 4: API ---
+fastapi==0.162.0
+uvicorn[standard]==0.54.0
+
+# --- Phase 5: tests ---
+pytest==9.1.1
+httpx==0.28.1              # used by FastAPI's TestClient
