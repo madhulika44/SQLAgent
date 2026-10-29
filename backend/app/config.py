@@ -41,7 +41,7 @@ class Settings(BaseSettings):
     groq_api_key: SecretStr = SecretStr("")
     groq_model: str = "openai/gpt-oss-120b"
     gemini_api_key: SecretStr = SecretStr("")
-    gemini_model: str = "gemini-3.6-flash"
+    gemini_model: str = "gemini-3.5-flash-lite"
     llm_temperature: float = 0.0
     llm_timeout_seconds: int = 30
 
