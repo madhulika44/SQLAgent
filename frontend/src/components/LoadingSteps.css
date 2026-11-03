@@ -1,0 +1,63 @@
+.loading-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-5);
+}
+
+.loading-step {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  transition: color 0.3s;
+}
+
+.loading-step__icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 3px solid var(--color-border);
+  background: var(--color-surface);
+  transition: all 0.3s;
+}
+
+.loading-step--done {
+  color: var(--color-success);
+}
+
+.loading-step--done .loading-step__icon {
+  border-color: var(--color-success);
+  background: var(--color-success);
+  color: #fff;
+}
+
+.loading-step--active {
+  color: var(--color-primary);
+}
+
+/* The active step's circle has a spinning arc (border-top in a different colour). */
+.loading-step--active .loading-step__icon {
+  border-color: var(--color-primary-soft);
+  border-top-color: var(--color-primary);
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Respect users who turn off animations in their OS settings. */
+@media (prefers-reduced-motion: reduce) {
+  .loading-step--active .loading-step__icon {
+    animation: none;
+  }
+}

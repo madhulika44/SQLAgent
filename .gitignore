@@ -8,6 +8,10 @@ __pycache__/
 *.pyc
 .pytest_cache/
 
+# Frontend (Node)
+node_modules/
+frontend/dist/
+
 # Generated reports
 demo_results.md
 

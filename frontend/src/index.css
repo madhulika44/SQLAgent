@@ -1,0 +1,184 @@
+/* =====================================================================
+   Global styles: design tokens (CSS variables), base elements, page layout.
+   Component-specific styles live next to each component (e.g. QuestionBox.css).
+
+   Built for a projector: large base font, strong contrast, generous spacing.
+   ===================================================================== */
+
+:root {
+  /* Colours */
+  --color-bg: #f4f6fa;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f8f9fc;
+  --color-border: #dfe3eb;
+  --color-text: #1b2333;
+  --color-text-muted: #5b6577;
+
+  --color-primary: #e2581c;        /* food-delivery orange */
+  --color-primary-dark: #b9420f;
+  --color-primary-soft: #fdebe2;
+
+  --color-success: #1e8e4f;
+  --color-success-soft: #e3f5ea;
+  --color-danger: #c62f3b;
+  --color-danger-soft: #fde8ea;
+  --color-info: #2563c9;
+  --color-info-soft: #e6effc;
+  --color-warning: #b26b00;
+  --color-warning-soft: #fff3dc;
+
+  /* Typography: 18px base reads well from the back of a room */
+  --font-sans: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Cascadia Code", Consolas, "Courier New", monospace;
+  --font-size-base: 18px;
+  --font-size-sm: 15px;
+  --font-size-lg: 22px;
+
+  /* Shape and spacing */
+  --radius: 10px;
+  --radius-pill: 999px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --shadow: 0 1px 3px rgba(20, 30, 50, 0.08), 0 4px 12px rgba(20, 30, 50, 0.05);
+
+  --header-height: 64px;
+  --sidebar-width: 340px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* ---------------------------------------------------------------------
+   Page layout: header on top, sidebar on the left, main area on the right
+   --------------------------------------------------------------------- */
+.app {
+  display: grid;
+  grid-template-rows: var(--header-height) 1fr;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-areas:
+    "header header"
+    "sidebar main";
+  height: 100%;
+}
+
+.app-header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: 0 var(--space-5);
+  background: var(--color-text);
+  color: #fff;
+}
+
+.app-title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.app-title span {
+  color: #ffb38a;
+}
+
+.app-header-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.app-sidebar {
+  grid-area: sidebar;
+  overflow-y: auto;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+}
+
+.app-main {
+  grid-area: main;
+  overflow-y: auto;
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0; /* lets wide tables scroll instead of stretching the page */
+}
+
+/* Smaller screens / 1366px projectors: narrower sidebar, tighter padding */
+@media (max-width: 1400px) {
+  :root {
+    --sidebar-width: 290px;
+    --font-size-base: 17px;
+  }
+  .app-main {
+    padding: var(--space-4) var(--space-5);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Shared building blocks
+   --------------------------------------------------------------------- */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.placeholder {
+  padding: var(--space-5);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.result-explanation {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--radius);
+  font-size: var(--font-size-lg);
+}
+
+.empty-state {
+  margin: auto;
+  max-width: 640px;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.empty-state h2 {
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+}

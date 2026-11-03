@@ -1,0 +1,22 @@
+.info-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  padding: 0 var(--space-2);
+  font-size: var(--font-size-sm);
+}
+
+.info-bar__item {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: baseline;
+}
+
+.info-bar__label {
+  color: var(--color-text-muted);
+}
+
+/* More than one attempt = the agent fixed its own mistake: worth pointing at. */
+.info-bar__item--highlight strong {
+  color: var(--color-warning);
+}
