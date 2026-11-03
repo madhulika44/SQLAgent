@@ -118,6 +118,20 @@ button:disabled {
   gap: var(--space-3);
 }
 
+.header-button {
+  padding: var(--space-1) var(--space-4);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-pill);
+}
+
+.header-button:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
 .app-sidebar {
   grid-area: sidebar;
   overflow-y: auto;
@@ -143,6 +157,16 @@ button:disabled {
   }
   .app-main {
     padding: var(--space-4) var(--space-5);
+  }
+}
+
+/* Very narrow windows (e.g. a zoomed-in browser): drop the subtitle, slimmer sidebar. */
+@media (max-width: 1100px) {
+  :root {
+    --sidebar-width: 250px;
+  }
+  .app-title span {
+    display: none;
   }
 }
 

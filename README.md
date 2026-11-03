@@ -5,7 +5,14 @@ City managers, operations, marketing and restaurant-partnership teams at a food 
 This **SQL Agent** turns a plain-English question into **T-SQL** and runs it on **Microsoft SQL Server**. It returns the results together with the generated SQL, so every answer can be checked.
 
 > "Which restaurants have the highest cancellation rate, and what's their food rating?"
-> → SQL + result table + chart suggestion + a step-by-step trace of how the agent got there.
+> → SQL + result table + chart + a step-by-step trace of how the agent got there.
+
+There's a **React dashboard** for demos ([frontend/](frontend/README.md)), a **REST API** (FastAPI) and a **command-line tool**.
+
+### Quick start (once setup is done)
+```powershell
+.\scripts\start_demo.ps1        # opens backend + frontend windows and the browser
+```
 
 The agent is built **from scratch, with no LangChain, LlamaIndex or other agent framework**, so every step is visible in a handful of small, commented Python files. The core loop is in [agent.py](backend/app/agent.py). The guide [docs/HOW_IT_WORKS.md](docs/HOW_IT_WORKS.md) walks through each step.
 
@@ -15,7 +22,7 @@ The agent is built **from scratch, with no LangChain, LlamaIndex or other agent 
 
 ```mermaid
 flowchart LR
-    U["User / React UI<br/>(later)"] -->|POST /ask| API["FastAPI<br/>backend/app/main.py"]
+    U["React UI<br/>frontend/ (Vite)"] -->|POST /ask| API["FastAPI<br/>backend/app/main.py"]
     API --> AG["Agent loop<br/>agent.py"]
 
     AG -->|1. schema text| SL["Schema loader<br/>schema_loader.py"]
@@ -52,7 +59,10 @@ SQLAgent/
 ├── backend/
 │   ├── app/               config, db, schema_loader, llm/, prompts, validator, agent, chart, cli, main (API)
 │   └── tests/             pytest: validator, agent loop, charts, end-to-end
-├── scripts/run_demo_questions.py   dress rehearsal for the demo -> demo_results.md
+├── frontend/              React + Vite dashboard (see frontend/README.md)
+├── scripts/
+│   ├── start_demo.ps1         starts backend + frontend and opens the browser
+│   └── run_demo_questions.py  dress rehearsal for the demo -> demo_results.md
 ├── docs/HOW_IT_WORKS.md   beginner-friendly walkthrough of the agent
 ├── .env.example           every setting, documented
 └── requirements.txt       pinned Python packages
@@ -117,6 +127,15 @@ uvicorn app.main:app --reload
 ```
 Open **http://localhost:8000/docs**, choose `POST /ask` → **Try it out**, and ask a question.
 
+### 8. Run the React UI
+You need **Node.js 20.19 or later** (https://nodejs.org). In a **second** terminal:
+```powershell
+cd frontend
+npm install        # first time only
+npm run dev
+```
+Open **http://localhost:5173**. From then on, `.\scripts\start_demo.ps1` (from the repo root) starts both servers in one go.
+
 ---
 
 ## Everyday commands
@@ -177,6 +196,13 @@ Both providers are on free tiers:
 
 ### "Rate limit" errors from Gemini mentioning `retryDelay`
 You've reached Gemini's requests-per-minute or requests-per-day limit. Wait a minute, or switch `GEMINI_MODEL` to another free Flash model listed in `.env.example`.
+
+### The UI says "Backend offline", or shows a CORS error in the browser console
+- **The backend isn't running on port 8000.** Start it (setup step 7). The status pill re-checks every 30 seconds.
+- **The UI's address isn't in `CORS_ORIGINS`** in `.env`. Defaults are `http://localhost:5173,http://localhost:3000`. Use `localhost`, not `127.0.0.1`.
+- **`VITE_API_URL` in `frontend/.env` doesn't point at the backend.** Restart `npm run dev` after editing it.
+
+The full list of UI fixes is in [frontend/README.md](frontend/README.md#troubleshooting).
 
 ### The agent's answer looks wrong
 LLMs aren't deterministic, so the same question can produce different SQL. To investigate:

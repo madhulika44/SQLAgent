@@ -1,0 +1,31 @@
+.chart-view {
+  margin: 0;
+  padding: var(--space-4) var(--space-4) var(--space-2);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.chart-view__title {
+  margin: 0 0 var(--space-3) var(--space-2);
+  font-weight: 600;
+}
+
+/* Recharts' default tooltip, restyled to match the app. */
+.chart-view .recharts-default-tooltip {
+  border-radius: var(--radius) !important;
+  border-color: var(--color-border) !important;
+  box-shadow: var(--shadow);
+  font-size: var(--font-size-sm);
+}
+
+.chart-view .recharts-legend-item-text {
+  color: var(--color-text) !important; /* legend text in text colour, not series colour */
+}
+
+/* Pie slice percentage labels. */
+.chart-view .recharts-pie-label-text {
+  fill: var(--color-text);
+  font-size: 15px;
+  font-weight: 600;
+}

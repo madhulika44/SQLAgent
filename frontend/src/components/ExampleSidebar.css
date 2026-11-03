@@ -1,0 +1,122 @@
+.sidebar {
+  padding: var(--space-4) var(--space-3);
+}
+
+.sidebar__section + .sidebar__section {
+  margin-top: var(--space-5);
+}
+
+.sidebar__heading {
+  margin: 0 var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
+
+.sidebar__tabs {
+  display: flex;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  margin-bottom: var(--space-3);
+  background: var(--color-bg);
+  border-radius: var(--radius);
+}
+
+.sidebar__tab {
+  flex: 1;
+  padding: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: none;
+  border-radius: calc(var(--radius) - 2px);
+}
+
+.sidebar__tab--active {
+  color: var(--color-text);
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+}
+
+.sidebar__group {
+  margin-bottom: var(--space-4);
+}
+
+.sidebar__group-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0 var(--space-2) var(--space-2);
+  font-size: var(--font-size-base);
+  color: var(--color-primary-dark);
+}
+
+.sidebar__count {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-primary-soft);
+}
+
+.sidebar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Each question is a button: keyboard-accessible and clearly clickable. */
+.sidebar__question {
+  display: flex;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  color: var(--color-text);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius);
+}
+
+.sidebar__question:hover:not(:disabled) {
+  background: var(--color-primary-soft);
+}
+
+.sidebar__question:disabled {
+  opacity: 0.5;
+}
+
+/* History items: one line each, cut off with "..." if too long. */
+.sidebar__question--history .sidebar__text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.sidebar__status {
+  flex-shrink: 0;
+  width: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.sidebar__question--ok .sidebar__status {
+  color: var(--color-success);
+}
+.sidebar__question--declined .sidebar__status {
+  color: var(--color-info);
+}
+.sidebar__question--error .sidebar__status {
+  color: var(--color-danger);
+}
+
+.sidebar__note {
+  margin: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}

@@ -1,0 +1,64 @@
+.sql-view {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid #2b3245;
+}
+
+.sql-view__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-sm);
+  color: #aeb7c9;
+  background: #232a3b;
+}
+
+.sql-view__copy {
+  padding: var(--space-1) var(--space-4);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: #fff;
+  background: var(--color-primary);
+  border: none;
+  border-radius: var(--radius);
+}
+
+.sql-view__copy:hover {
+  background: var(--color-primary-dark);
+}
+
+/* Dark code panel: easy to read on a projector and familiar from code editors. */
+.sql-view__code {
+  margin: 0;
+  padding: var(--space-4) var(--space-5);
+  overflow: auto;
+  max-height: 60vh;
+  font-family: var(--font-mono);
+  font-size: 17px;
+  line-height: 1.6;
+  color: #e6e9f0;
+  background: #1b2130;
+}
+
+.sql-token--keyword {
+  color: #ff9e64;
+  font-weight: 600;
+}
+.sql-token--function {
+  color: #7dcfff;
+}
+.sql-token--string {
+  color: #9ece6a;
+}
+.sql-token--number {
+  color: #e0af68;
+}
+.sql-token--identifier {
+  color: #bb9af7;
+}
+.sql-token--comment {
+  color: #7a849a;
+  font-style: italic;
+}

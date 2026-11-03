@@ -57,6 +57,20 @@ export function prettyColumnName(name) {
   return (name.match(WORD_PATTERN) || [name]).join(" ");
 }
 
+/**
+ * Short numbers for chart axes, Indian style:
+ * 1,23,45,678 -> "1.2Cr", 7,40,939 -> "7.4L", 18,106 -> "18.1K", 950 -> "950".
+ */
+export function formatCompact(value) {
+  if (!isNumber(value)) return String(value ?? "");
+  const abs = Math.abs(value);
+  const trim = (n) => n.toFixed(1).replace(/\.0$/, "");
+  if (abs >= 1e7) return `${trim(value / 1e7)}Cr`;
+  if (abs >= 1e5) return `${trim(value / 1e5)}L`;
+  if (abs >= 1e3) return `${trim(value / 1e3)}K`;
+  return indianNumber.format(value);
+}
+
 /** 4180 -> "4.2 s", 850 -> "850 ms" */
 export function formatDuration(ms) {
   return ms >= 1000 ? `${(ms / 1000).toFixed(1)} s` : `${ms} ms`;

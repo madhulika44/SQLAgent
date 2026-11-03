@@ -1,0 +1,160 @@
+.trace__summary {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.trace__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Each step: icon on the left, a vertical line connecting the icons. */
+.trace__step {
+  position: relative;
+  display: flex;
+  gap: var(--space-4);
+  padding-bottom: var(--space-4);
+}
+
+.trace__step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: 40px;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-border);
+}
+
+.trace__icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--color-success);
+}
+
+.trace__body {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.trace__header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.trace__name {
+  font-weight: 700;
+}
+
+.trace__attempt {
+  font-size: 13px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+}
+
+.trace__badge {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 1px var(--space-2);
+  border-radius: var(--radius-pill);
+  color: #fff;
+}
+
+.trace__duration {
+  margin-left: auto;
+  font-size: var(--font-size-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-muted);
+}
+
+.trace__detail {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  overflow-wrap: anywhere;
+}
+
+.trace__bar {
+  height: 4px;
+  margin-top: var(--space-2);
+  border-radius: 2px;
+  background: var(--color-border);
+}
+
+.trace__sql {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-sm);
+}
+
+.trace__sql summary {
+  cursor: pointer;
+  color: var(--color-info);
+  font-weight: 600;
+}
+
+.trace__sql pre {
+  margin: var(--space-2) 0 0;
+  padding: var(--space-3);
+  overflow: auto;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  background: var(--color-surface-muted);
+  border-radius: var(--radius);
+}
+
+/* ---- The key demo moments: each kind gets a colour, an icon AND a text badge ---- */
+.trace__step--info .trace__icon {
+  background: var(--color-info);
+}
+
+.trace__step--error .trace__icon,
+.trace__step--error .trace__badge {
+  background: var(--color-danger);
+}
+.trace__step--error .trace__body {
+  border-color: var(--color-danger);
+  background: var(--color-danger-soft);
+}
+
+.trace__step--fallback .trace__icon,
+.trace__step--fallback .trace__badge,
+.trace__step--wait .trace__icon,
+.trace__step--wait .trace__badge {
+  background: var(--color-warning);
+}
+.trace__step--fallback .trace__body,
+.trace__step--wait .trace__body {
+  border: 2px solid var(--color-warning);
+  background: var(--color-warning-soft);
+}
+
+.trace__step--retry .trace__icon,
+.trace__step--retry .trace__badge {
+  background: #7048c8;
+}
+.trace__step--retry .trace__body {
+  border-left: 5px solid #7048c8;
+}

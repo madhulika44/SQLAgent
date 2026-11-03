@@ -50,7 +50,12 @@ export function getSchema() {
   return request("/schema");
 }
 
-/** POST /ask -> { question, sql, explanation, columns, rows, chart, trace, error, ... } */
+/** POST /schema/refresh -> same shape as getSchema(), re-read from the database */
+export function refreshSchema() {
+  return request("/schema/refresh", { method: "POST" });
+}
+
+/** POST /ask ->{ question, sql, explanation, columns, rows, chart, trace, error, ... } */
 export function askQuestion(question) {
   return request("/ask", { method: "POST", body: JSON.stringify({ question }) });
 }
